@@ -1,0 +1,239 @@
+### ======================
+### GATEWAY (port 2000)
+### ======================
+
+### Health Check Gateway
+GET http://localhost:2000/
+
+### ======================
+### AUTH ROUTES (via Gateway)
+### ======================
+
+### Create a new user (route 1)
+POST http://localhost:2000/auth/create
+Content-Type: application/json
+
+{
+  "name": "Krutarth",
+  "password": "password123"
+}
+
+###
+
+### Create a new user (route 2 - alternative)
+POST http://localhost:2000/create/user
+Content-Type: application/json
+
+{
+  "name": "AltUser",
+  "password": "altpass123"
+}
+
+###
+
+### Login (get JWT token)
+POST http://localhost:2000/auth/login
+Content-Type: application/json
+
+{
+  "name": "Krutarth",
+  "password": "password123"
+}
+
+###
+
+### Create second user
+POST http://localhost:2000/auth/create
+Content-Type: application/json
+
+{
+  "name": "TestUser",
+  "password": "testpass123"
+}
+
+###
+
+### Login second user
+POST http://localhost:2000/auth/login
+Content-Type: application/json
+
+{
+  "name": "TestUser",
+  "password": "testpass123"
+}
+
+### ======================
+### STUDENT ROUTES (via Gateway) - FIXED ROUTES
+### ======================
+# 👉 Replace YOUR_JWT_TOKEN_HERE with actual token from login response
+
+### Create a student
+POST http://localhost:2000/students
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+Content-Type: application/json
+
+{
+  "name": "Student A"
+}
+
+###
+
+### Create another student
+POST http://localhost:2000/students
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsIm5hbWUiOiJUZXN0VXNlciIsImlhdCI6MTc1Nzk2NDkzMywiZXhwIjoxNzU3OTY4NTMzfQ.h2LLg_CeF-AtwhLETrYluvaZAX8-BX1AX8asv_FLyRk
+Content-Type: application/json
+
+{
+  "name": "Student B"
+}
+
+###
+
+### Get all students
+GET http://localhost:2000/students
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+
+###
+
+### Update student (PUT - full replace)
+PUT http://localhost:2000/students/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+Content-Type: application/json
+
+{
+  "name": "Updated Student A"
+}
+
+###
+
+### Partially update student (PATCH)
+PATCH http://localhost:2000/students/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+Content-Type: application/json
+
+{
+  "name": "Partially Updated Student A"
+}
+
+###
+
+### Delete student
+DELETE http://localhost:2000/students/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsIm5hbWUiOiJUZXN0VXNlciIsImlhdCI6MTc1Nzk2NDkzMywiZXhwIjoxNzU3OTY4NTMzfQ.h2LLg_CeF-AtwhLETrYluvaZAX8-BX1AX8asv_FLyRk
+
+### ======================
+### COURSE ROUTES (via Gateway) - FIXED ROUTES
+### ======================
+# 👉 Replace YOUR_JWT_TOKEN_HERE with actual token
+
+### Create a course
+POST http://localhost:2000/courses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NTUyNSwiZXhwIjoxNzU3OTY5MTI1fQ.5Fo9KzkOGzx_ZPaF2aAjZ9iEfZiRQTfbHzxSlyPhO9I
+Content-Type: application/json
+
+{
+  "name": "Mathematics 101"
+}
+
+###
+
+### Create another course
+POST http://localhost:2000/courses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+Content-Type: application/json
+
+{
+  "name": "Physics 101"
+}
+
+###
+
+### Get all courses
+GET http://localhost:2000/courses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+
+###
+
+### Enroll student in course
+POST http://localhost:2000/courses/enroll/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+Content-Type: application/json
+
+{
+  "studentId": 1
+}
+
+###
+
+### Enroll another student
+POST http://localhost:2000/courses/enroll/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+Content-Type: application/json
+
+{
+  "studentId": 2
+}
+
+###
+
+### Get all students in course
+GET http://localhost:2000/courses/students/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+
+###
+
+### Delete course
+DELETE http://localhost:2000/courses/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+
+### ======================
+### DIRECT SERVICE TESTING (Optional)
+### ======================
+
+### Test Auth Service Directly
+GET http://localhost:3000/
+
+###
+
+### Test Student Service Directly
+GET http://localhost:4000/
+
+###
+
+### Test Course Service Directly  
+GET http://localhost:5000/
+
+### ======================
+### ERROR TESTING (via Gateway)
+### ======================
+
+### No token (should fail with 401)
+GET http://localhost:2000/students
+
+###
+
+### Invalid token (should fail with 403)
+GET http://localhost:2000/students
+Authorization: Bearer invalid_token_here
+
+###
+
+### Invalid JSON (should fail with 400)
+POST http://localhost:2000/auth/create
+Content-Type: application/json
+
+{
+  "name": "TestUser",
+  "password": "missing_comma"
+}
+
+###
+
+### Missing required fields (should fail with 400)
+POST http://localhost:2000/students
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJLcnV0YXJ0aCIsImlhdCI6MTc1Nzk2NDg4MSwiZXhwIjoxNzU3OTY4NDgxfQ.N-kPjEhory54C95Z1E3pJP_VIcBA6Xj520yRGh_WBWI
+Content-Type: application/json
+
+{
+  "description": "Missing name field"
+}
